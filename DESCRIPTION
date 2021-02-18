@@ -1,6 +1,6 @@
 Package: susy3dapp
 Title: SusySafe 3d
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     c(person(given = "Corrado",
              family = "Lanera",
@@ -29,7 +29,8 @@ Imports:
     processx,
     rlang (>= 0.1.2),
     shiny,
-    tibble
+    tibble,
+    rgl
 Suggests: 
     covr,
     roxygen2,
