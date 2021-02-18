@@ -25,8 +25,15 @@ golem::add_module(name = "obj_inspection") # Name of the module
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
-usethis::use_test("fetch_obj")
-golem::add_fct("fetch_obj")
+tdd_add_fct <- function(name) {
+  list(usethis::use_test, golem::add_fct) %>%
+    purrr::walk(~.(name))
+}
+
+tdd_add_fct("fetch_obj")
+tdd_add_fct("fetch_ssr")
+
+
 # golem::add_utils("helpers")
 
 
