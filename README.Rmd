@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # susy3dapp
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/susy3dapp)](https://CRAN.R-project.org/package=susy3dapp)
+[![Codecov test coverage](https://codecov.io/gh/CorradoLanera/susy3dapp/branch/master/graph/badge.svg)](https://codecov.io/gh/CorradoLanera/susy3dapp?branch=master)
 <!-- badges: end -->
 
 The goal of `{susy3dapp}` is to provide a Demo for the SusySafe 3d
