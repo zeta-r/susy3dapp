@@ -1,5 +1,8 @@
 # susy3dapp (development version)
 
+* Move data for internal usage only
+* Added `mod_obj_inspection.R` module to host single object selection 
+  and corresponding patients' characteristics inspection.
 * Added 3d support ({rgl})
 * Added obj and ssr data
 
