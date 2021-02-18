@@ -1,5 +1,8 @@
 # susy3dapp (development version)
 
+* Added 3d support ({rgl})
+* Added obj and ssr data
+
 # susy3dapp 0.0.0.9001
 
 * Added support for QA, TDD and CI/CD ({spelling}, {renv}, {tettthat},
