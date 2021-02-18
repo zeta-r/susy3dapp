@@ -17,6 +17,9 @@
 ## Add one line by package you want to add as dependency
 
 usethis::use_package("rgl")
+usethis::use_package("glue")
+usethis::use_package("ggplot2")
+usethis::use_package("dplyr")
 
 
 ## Add modules ----

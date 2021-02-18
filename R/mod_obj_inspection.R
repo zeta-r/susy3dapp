@@ -6,7 +6,7 @@
 #'
 #' @noRd
 #'
-#' @importFrom shiny NS tagList fluidRow selectInput
+#' @importFrom shiny NS tagList fluidRow selectInput plotOutput
 mod_obj_inspection_ui <- function(id) {
   ns <- NS(id)
 
@@ -19,6 +19,9 @@ mod_obj_inspection_ui <- function(id) {
         ns("obj"), "Select an object",
         choices = obj_list
       )
+    )),
+    fluidRow(col_12(
+      plotOutput(ns("age"))
     ))
   )
 }
@@ -27,11 +30,49 @@ mod_obj_inspection_ui <- function(id) {
 #'
 #' @noRd
 #'
-#' @importFrom shiny moduleServer
+#' @importFrom shiny moduleServer reactive
+#' @import ggplot2
 mod_obj_inspection_server <- function(id) {
+
+  ssr <- fetch_ssr() %>%
+    dplyr::select(
+      .data[["gender"]], .data[["ageOfChild"]], .data[["death"]],
+      .data[["complication"]], .data[["img3d"]]
+    )
+
+  obj <- fetch_obj()
 
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
+
+
+    selected_obj <- reactive(
+      obj %>%
+        dplyr::filter(.data[["descrENG"]] == input[["obj"]])
+    )
+
+    data_of_interest <- reactive(
+      dplyr::inner_join(ssr, selected_obj())
+    )
+
+    output[["age"]] <- renderPlot(
+      data_of_interest() %>%
+        ggplot(aes(
+          x = .data[["gender"]],
+          y = .data[["ageOfChild"]],
+          color = .data[["gender"]]
+        )) +
+        geom_boxplot(varwidth = TRUE) +
+        labs(
+          x = "Gender",
+          y = "Age",
+          title = glue::glue(
+            "Age distribution for children having fbi from {selected_obj()[['descrENG']]}."
+          )
+        ) +
+        theme_bw() +
+        guides(color = "none")
+    )
 
   })
 

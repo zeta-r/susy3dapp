@@ -30,7 +30,9 @@ Imports:
     rgl,
     rlang (>= 0.1.2),
     shiny,
-    tibble
+    tibble,
+    ggplot2,
+    dplyr
 Suggests: 
     covr,
     knitr,
