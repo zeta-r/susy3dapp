@@ -1,5 +1,7 @@
 # susy3dapp (development version)
 
+* defined `fetch_data()` to retrieve object tibble from a connection
+  (currently from internal stored db)
 * Move data for internal usage only
 * Added `mod_obj_inspection.R` module to host single object selection 
   and corresponding patients' characteristics inspection.
