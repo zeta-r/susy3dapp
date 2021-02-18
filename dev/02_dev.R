@@ -25,8 +25,8 @@ golem::add_module(name = "obj_inspection") # Name of the module
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
-# usethis::use_test("app")
-# golem::add_fct("helpers")
+usethis::use_test("fetch_obj")
+golem::add_fct("fetch_obj")
 # golem::add_utils("helpers")
 
 
