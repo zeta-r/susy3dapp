@@ -7,8 +7,9 @@
 #' @noRd
 #'
 #' @examples
-#' list_to_li(c("a","b"))
-#'
+#' \dontrun{
+#'   list_to_li(c("a","b"))
+#' }
 #' @importFrom htmltools tags tagAppendAttributes tagList
 list_to_li <- function(list, class = NULL) {
   if (is.null(class)) {
@@ -34,14 +35,18 @@ list_to_li <- function(list, class = NULL) {
     )
     tagList(res)
   }
-
 }
+
 #' Turn an R list into corresponding HTML paragraph tags
 #'
 #' @param list an R list
 #' @param class a class for the paragraph tags
 #' @examples
-#' list_to_p(c("This is the first paragraph", "this is the second paragraph"))
+#' \dontrun{
+#'   list_to_p(
+#'     c("This is the first paragraph", "this is the second paragraph")
+#'   )
+#' }
 #' @importFrom htmltools tags tagAppendAttributes tagList
 #'
 list_to_p <- function(list, class = NULL) {
@@ -68,14 +73,13 @@ list_to_p <- function(list, class = NULL) {
     )
     tagList(res)
   }
-
 }
 
 #' @importFrom htmltools tags tagAppendAttributes tagList
 named_to_li <- function(list, class = NULL) {
-  if(is.null(class)) {
+  if (is.null(class)) {
     res <- mapply(
-      function(x, y){
+      function(x, y) {
         tags$li(
           HTML(
             sprintf("<b>%s:</b> %s", y, x)
@@ -89,7 +93,7 @@ named_to_li <- function(list, class = NULL) {
     tagList(res)
   } else {
     res <- mapply(
-      function(x, y){
+      function(x, y) {
         tags$li(
           HTML(
             sprintf("<b>%s:</b> %s", y, x)
@@ -127,7 +131,7 @@ named_to_li <- function(list, class = NULL) {
 tagRemoveAttributes <- function(tag, ...) {
   attrs <- as.character(list(...))
   for (i in seq_along(attrs)) {
-    tag$attribs[[ attrs[i] ]] <- NULL
+    tag$attribs[[attrs[i]]] <- NULL
   }
   tag
 }
@@ -350,7 +354,11 @@ make_action_button <- function(tag, inputId = NULL) {
     if (!is.null(tag$attribs$id)) {
       cli::cat_bullet(bullet = "bullet", bullet_col = "red",
         paste(
-          "tag already has an id. Please use input$", tag$attribs$id, "to access it from the server side. inputId will be ignored.")
+          "tag already has an id. Please use input$",
+          tag$attribs$id,
+          "to access it from the server side.",
+          "inputId will be ignored."
+        )
       )
     } else {
       tag$attribs$id <- inputId
@@ -385,7 +393,7 @@ make_action_button <- function(tag, inputId = NULL) {
 #' #' @importFrom rmarkdown render
 #' #' @importFrom markdown markdownToHTML
 #' #' @importFrom htmltools HTML
-#' includeRMarkdown <- function(path){
+#' includeRMarkdown <- function(path) {
 #'
 #'   md <- tempfile(fileext = '.md')
 #'

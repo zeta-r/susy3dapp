@@ -1,39 +1,43 @@
 Package: susy3dapp
 Title: SusySafe 3d
 Version: 0.0.0.9000
-Authors@R: c(
-    person('Corrado', 'Lanera',
-      email = 'CorradoLanera@zetaresearch.com',
-      role = c('cre', 'aut', 'cph')
-    ),
-    person('Marco', 'Ghidina',
-      email = 'MarcoGhidina@zetaresearch.com',
-      role = c('ctb')
-    ),
-    person('Zeta Research',
-      role = c('cph')
-    )
-  )
+Authors@R: 
+    c(person(given = "Corrado",
+             family = "Lanera",
+             role = c("cre", "aut", "cph"),
+             email = "CorradoLanera@zetaresearch.com"),
+      person(given = "Marco",
+             family = "Ghidina",
+             role = "ctb",
+             email = "MarcoGhidina@zetaresearch.com"),
+      person(given = "Zeta Research",
+             role = "cph"))
 Description: Demo for the SusySafe 3d App.
 License: file LICENSE
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.1.1
 URL: https://github.com/zeta-r/susy3dapp
 BugReports: https://github.com/zeta-r/susy3dapp/issues
-Config/testthat/edition: 3
-Language: en-US
-Roxygen: list(markdown = TRUE)
 Imports: 
     attempt,
+    cli,
     config,
     DT,
     glue,
     golem,
     htmltools,
+    magrittr,
+    pkgload,
     processx,
-    shiny
+    rlang (>= 0.1.2),
+    shiny,
+    tibble
 Suggests: 
+    covr,
+    roxygen2,
     spelling,
-    testthat (>= 3.0.0),
-    covr
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

@@ -1,3 +1,4 @@
+source("renv/activate.R")
 # Sourcing user .Rprofile if it exists 
 home_profile <- file.path(
   Sys.getenv("HOME"), 

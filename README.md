@@ -7,8 +7,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/susy3dapp)](https://CRAN.R-project.org/package=susy3dapp)
-[![Codecov test
-coverage](https://codecov.io/gh/CorradoLanera/susy3dapp/branch/master/graph/badge.svg)](https://codecov.io/gh/CorradoLanera/susy3dapp?branch=master)
+[![lint](https://github.com/zeta-r/susy3dapp/workflows/lint/badge.svg)](https://github.com/zeta-r/susy3dapp/actions)
+[![R-CMD-check](https://github.com/zeta-r/susy3dapp/workflows/R-CMD-check/badge.svg)](https://github.com/zeta-r/susy3dapp/actions)
+[![test-coverage](https://github.com/zeta-r/susy3dapp/workflows/test-coverage/badge.svg)](https://github.com/zeta-r/susy3dapp/actions)
 <!-- badges: end -->
 
 The goal of `{susy3dapp}` is to provide a Demo for the SusySafe 3d Shiny

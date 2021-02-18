@@ -81,8 +81,44 @@ lintr::lint_package()
 ## Set the code coverage service ("codecov" or "coveralls")
 usethis::use_coverage()
 
-
+## Activate renv
+renv::init(settings = list(snapshot.type = "explicit"))
+renv::status() # just to check
 # You're now set! ----
+
+
+## tidy stuff
+usethis::use_pipe()
+usethis::use_tibble()
+usethis::use_tidy_eval()
+
+## CI/CD and TDD
+usethis::use_github_action(
+  url = "https://raw.githubusercontent.com/CorradoLanera/actions/master/lint-renv.yaml"
+)
+usethis::use_github_actions_badge("lint")
+
+usethis::use_github_action(
+  url = "https://raw.githubusercontent.com/CorradoLanera/actions/master/R-CMD-check-renv.yaml"
+)
+usethis::use_github_actions_badge("R-CMD-check")
+
+usethis::use_github_action(
+  url = "https://raw.githubusercontent.com/CorradoLanera/actions/master/covr-renv.yaml"
+)
+usethis::use_github_actions_badge("test-coverage")
+
+renv::install("CorradoLanera/autotestthat") # {renv} installation
+
+
+
+## final checks
+usethis::use_tidy_description()
+devtools::check_man()
+spelling::spell_check_package()
+spelling::update_wordlist()
+lintr::lint_package()
+renv::status()
 
 # go to dev/02_dev.R
 rstudioapi::navigateToFile( "dev/02_dev.R" )
