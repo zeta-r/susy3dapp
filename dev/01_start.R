@@ -120,6 +120,8 @@ spelling::update_wordlist()
 lintr::lint_package()
 renv::status()
 
+usethis::use_version()
+
 # go to dev/02_dev.R
 rstudioapi::navigateToFile( "dev/02_dev.R" )
 
