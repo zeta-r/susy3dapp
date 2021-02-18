@@ -1,0 +1,8 @@
+default:
+  golem_name: susy3dapp
+  golem_version: 0.0.0.9000
+  app_prod: no
+production:
+  app_prod: yes
+dev:
+  golem_wd: /home/cl/Documents/z/2021-susy3dapp/susy3dapp
