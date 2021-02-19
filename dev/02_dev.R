@@ -15,35 +15,35 @@
 
 ## Dependencies ----
 ## Add one line by package you want to add as dependency
-usethis::use_package( "thinkr" )
+
+usethis::use_package("rgl")
+usethis::use_package("Rvcg")
+usethis::use_package("glue")
+usethis::use_package("ggplot2")
+usethis::use_package("dplyr")
+usethis::use_package("stringr")
+
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module( name = "name_of_module1" ) # Name of the module
-golem::add_module( name = "name_of_module2" ) # Name of the module
+golem::add_module(name = "obj_inspection") # Name of the module
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
-golem::add_fct( "helpers" )
-golem::add_utils( "helpers" )
+tdd_add_fct <- function(name) {
+  list(usethis::use_test, golem::add_fct) %>%
+    purrr::walk(~.(name))
+}
 
-## External resources
-## Creates .js and .css files at inst/app/www
-golem::add_js_file( "script" )
-golem::add_js_handler( "handlers" )
-golem::add_css_file( "custom" )
+tdd_add_fct("fetch_obj")
+tdd_add_fct("fetch_ssr")
 
-## Add internal datasets ----
-## If you have data in your package
-usethis::use_data_raw( name = "my_dataset", open = FALSE )
+golem::add_utils("utils")
 
-## Tests ----
-## Add one line by test you want to create
-usethis::use_test( "app" )
 
 # Documentation
 
 # Create a summary readme for the testthat subdirectory
 # remotes::install_github('yonicd/covrpage')
-covrpage::covrpage()
+covrpage::covrpage(vignette = TRUE)
 

@@ -10,7 +10,8 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("susy3dapp")
+      h1("SusySafe 3D-Enanched Registry Explorator"),
+      mod_obj_inspection_ui("obj_inspection_ui_1")
     )
   )
 }
