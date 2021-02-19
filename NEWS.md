@@ -1,4 +1,4 @@
-# susy3dapp (development version)
+# susy3dapp 0.1.0
 
 * Added table with object's characteristics.
 * Added 3d Show for the object selected (if single)
