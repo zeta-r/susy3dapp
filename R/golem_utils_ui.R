@@ -271,13 +271,28 @@ col_10 <- function(...) {
 }
 
 #' @importFrom shiny column
+col_9 <- function(...) {
+  column(9, ...)
+}
+
+#' @importFrom shiny column
 col_8 <- function(...) {
   column(8, ...)
 }
 
 #' @importFrom shiny column
+col_7 <- function(...) {
+  column(7, ...)
+}
+
+#' @importFrom shiny column
 col_6 <- function(...) {
   column(6, ...)
+}
+
+#' @importFrom shiny column
+col_5 <- function(...) {
+  column(5, ...)
 }
 
 
@@ -374,41 +389,3 @@ make_action_button <- function(tag, inputId = NULL) {
   # return tag
   tag
 }
-
-
-# UNCOMMENT AND USE
-#
-# usethis::use_package("markdown")
-# usethis::use_package("rmarkdown")
-#
-# To use this part of the UI
-#
-#' #' Include Content From a File
-#' #'
-#' #' Load rendered RMarkdown from a file and turn into HTML.
-#' #'
-#' #' @rdname includeRMarkdown
-#' #' @export
-#' #'
-#' #' @importFrom rmarkdown render
-#' #' @importFrom markdown markdownToHTML
-#' #' @importFrom htmltools HTML
-#' includeRMarkdown <- function(path) {
-#'
-#'   md <- tempfile(fileext = '.md')
-#'
-#'   on.exit(unlink(md),add = TRUE)
-#'
-#'   rmarkdown::render(
-#'     path,
-#'     output_format = 'md_document',
-#'     output_dir = tempdir(),
-#'     output_file = md,quiet = TRUE
-#'     )
-#'
-#'   html <- markdown::markdownToHTML(md, fragment.only = TRUE)
-#'
-#'   Encoding(html) <- "UTF-8"
-#'
-#'   return(HTML(html))
-#' }

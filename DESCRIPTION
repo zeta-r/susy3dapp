@@ -30,14 +30,20 @@ Imports:
     rgl,
     rlang (>= 0.1.2),
     shiny,
-    tibble
+    tibble,
+    ggplot2,
+    dplyr,
+    Rvcg,
+    stringr,
+    plotly
 Suggests: 
     covr,
     knitr,
     rmarkdown,
     roxygen2,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    purrr
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
@@ -46,3 +52,5 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
