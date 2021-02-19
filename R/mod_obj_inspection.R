@@ -42,10 +42,20 @@ mod_obj_inspection_ui <- function(id) {
                               width = "100%"
           ), align = "center")
         ),
-        fluidRow(
-          col_12(plotly::plotlyOutput(ns("age"))),
-          col_6(plotly::plotlyOutput(ns("death"))),
-          col_6(plotly::plotlyOutput(ns("complication")))
+        tabsetPanel(
+          tabPanel("Population",
+            col_12(plotly::plotlyOutput(ns("age")))
+          ),
+          tabPanel("Events",
+                   col_4(plotly::plotlyOutput(ns("death"))),
+                   col_4(plotly::plotlyOutput(ns("hospitalised"))),
+                   col_4(plotly::plotlyOutput(ns("complication")))
+          ),
+          tabPanel("Geometric associations",
+                   col_12(plotly::plotlyOutput(ns("hosp_vol_area"))),
+                   col_6(plotly::plotlyOutput(ns("hosp_area"))),
+                   col_6(plotly::plotlyOutput(ns("hosp_vol")))
+          )
         )
       )
     )
@@ -62,11 +72,19 @@ mod_obj_inspection_server <- function(id) {
 
   ssr <- fetch_ssr() %>%
     dplyr::select(
-      .data[["gender"]], .data[["ageOfChild"]], .data[["death"]],
-      .data[["complication"]], .data[["img3d"]]
+      .data[["gender"]], .data[["ageOfChild"]], .data[["hospitalised"]],
+      .data[["complication"]], .data[["img3d"]], .data[["death"]]
     )
 
-  obj <- fetch_obj()
+  obj <- fetch_obj() %>%
+    dplyr::mutate(
+      area = .data[["stl"]] %>%
+        purrr::map_dbl(Rvcg::vcgArea) %>%
+        round(3),
+      volume = .data[["stl"]] %>%
+        purrr::map_dbl(Rvcg::vcgVolume) %>%
+        round(3)
+    )
 
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -108,6 +126,24 @@ mod_obj_inspection_server <- function(id) {
       })
 
 
+      output[["hospitalised"]] <- plotly::renderPlotly({
+        gg <- data_of_interest %>%
+          ggplot(aes(
+            x = .data[["hospitalised"]],
+            fill = .data[["gender"]]
+          )) +
+          geom_bar() +
+          labs(
+            x = "Hospitalised",
+            title =
+              "Hospitalised cases for children having FBI"
+          ) +
+          theme_bw() +
+          theme(legend.position = 'none')
+
+        clean_ggplotly(gg)
+      })
+
       output[["death"]] <- plotly::renderPlotly({
         gg <- data_of_interest %>%
           ggplot(aes(
@@ -120,8 +156,7 @@ mod_obj_inspection_server <- function(id) {
             title =
               "Death cases for children having FBI"
           ) +
-          theme_bw() +
-          theme(legend.position = 'none')
+          theme_bw()
 
         clean_ggplotly(gg)
       })
@@ -144,20 +179,87 @@ mod_obj_inspection_server <- function(id) {
         clean_ggplotly(gg)
       })
 
+      gg_color_hue <- function(n) {
+        hues = seq(15, 375, length = n + 1)
+        hcl(h = hues, l = 65, c = 100)[1:n]
+      }
+      cols <- gg_color_hue(2)
+      output[["hosp_vol_area"]] <- plotly::renderPlotly({
+        gg <- data_of_interest %>%
+          ggplot(aes(
+            x = .data[["area"]],
+            y = .data[["volume"]],
+            color = .data[["hospitalised"]]
+          )) +
+          geom_jitter(width = 0.25, height = 0.25) +
+          scale_colour_manual(values = c("no" = cols[[2]], "yes" = cols[[1]])) +
+          labs(
+            x = "Area",
+            y = "Volume",
+            color = "Hospitalized",
+            title =
+              "Area and Volume across hospitalized children having FBI"
+          ) +
+          theme_bw()
+
+        clean_ggplotly(gg)
+      })
+
+
+      output[["hosp_vol"]] <- plotly::renderPlotly({
+        gg <- data_of_interest %>%
+          ggplot(aes(
+            x = .data[["hospitalised"]],
+            y = .data[["volume"]],
+            color = .data[["hospitalised"]]
+          )) +
+          geom_boxplot(varwidth = TRUE) +
+          geom_jitter() +
+          scale_colour_manual(values = c("no" = cols[[2]], "yes" = cols[[1]])) +
+          labs(
+            x = "Hospitalised",
+            y = "Volume",
+            title =
+              "Volume distribution for children having FBI"
+          ) +
+          theme_bw() +
+          theme(legend.position = 'none')
+
+        clean_ggplotly(gg)
+      })
+
+
+      output[["hosp_area"]] <- plotly::renderPlotly({
+        gg <- data_of_interest %>%
+          ggplot(aes(
+            x = .data[["hospitalised"]],
+            y = .data[["area"]],
+            color = .data[["hospitalised"]]
+          )) +
+          geom_boxplot(varwidth = TRUE) +
+          scale_colour_manual(values = c("no" = cols[[2]], "yes" = cols[[1]])) +
+          geom_jitter() +
+          labs(
+            x = "Hospitalised",
+            y = "Area",
+            title =
+              "Area distribution for hospedalized children having FBI"
+          ) +
+          theme_bw() +
+          theme(legend.position = 'none')
+
+        clean_ggplotly(gg)
+      })
 
       output[["obj_tbl"]] <- DT::renderDT({
         base_tbl <- selected_obj %>%
           dplyr::select(
             .data[["cn8"]], .data[["cn8_ss"]], .data[["name"]],
-            .data[["stl"]]
+            .data[["stl"]], .data[["area"]], .data[["volume"]]
           ) %>%
-          dplyr::mutate(
-            `Area (cm^2)` = .data[["stl"]] %>%
-              purrr::map_dbl(Rvcg::vcgArea) %>%
-              round(3),
-            `Volume (cm^3)` = .data[["stl"]] %>%
-              purrr::map_dbl(Rvcg::vcgVolume) %>%
-              round(3)
+          dplyr::rename(
+            `Area (cm^2)` = .data[["area"]],
+            `Volume (cm^3)` = .data[["volume"]]
           ) %>%
           dplyr::select(-.data[["stl"]]) %>%
           dplyr::rename(

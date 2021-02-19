@@ -1,3 +1,9 @@
+# susy3dapp 0.2.0
+
+* Introduced tabsets (Population, Events, and Geometric associations).
+* Added hospitalizations and changed barplot to reflect hospitalizations
+  instead of deaths.
+
 # susy3dapp 0.1.0
 
 * Added table with object's characteristics.
