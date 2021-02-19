@@ -1,4 +1,4 @@
-# susy3dapp (development version)
+# susy3dapp 0.2.0
 
 * Introduced tabsets (Population, Events, and Geometric associations).
 * Added hospitalizations and changed barplot to reflect hospitalizations
