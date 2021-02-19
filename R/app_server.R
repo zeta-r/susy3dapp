@@ -8,3 +8,4 @@ app_server <- function(input, output, session) {
   # Your application server logic
   mod_obj_inspection_server("obj_inspection_ui_1")
 }
+

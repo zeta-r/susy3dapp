@@ -32,7 +32,10 @@ Imports:
     shiny,
     tibble,
     ggplot2,
-    dplyr
+    dplyr,
+    Rvcg,
+    stringr,
+    plotly
 Suggests: 
     covr,
     knitr,

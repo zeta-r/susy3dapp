@@ -17,9 +17,11 @@
 ## Add one line by package you want to add as dependency
 
 usethis::use_package("rgl")
+usethis::use_package("Rvcg")
 usethis::use_package("glue")
 usethis::use_package("ggplot2")
 usethis::use_package("dplyr")
+usethis::use_package("stringr")
 
 
 ## Add modules ----
@@ -36,8 +38,7 @@ tdd_add_fct <- function(name) {
 tdd_add_fct("fetch_obj")
 tdd_add_fct("fetch_ssr")
 
-
-# golem::add_utils("helpers")
+golem::add_utils("utils")
 
 
 # Documentation

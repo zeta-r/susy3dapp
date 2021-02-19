@@ -1,5 +1,9 @@
 # susy3dapp (development version)
 
+* Added table with object's characteristics.
+* Added 3d Show for the object selected (if single)
+* Added check boxes to select (multiple) objects
+* Added bar plots for deaths and complications
 * defined `fetch_ssr()` to retrieve the SusySafe registry tibble from a
   connection (currently from internal stored `data_ssr` db).
 * defined `fetch_obj()` to retrieve object tibble from a connection
